@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -9,6 +12,7 @@ import {
 
 import './App.css';
 
+import NavBar from "./components/NavBar/NavBar"
 import Login from "./components/LoginRegister/Login/Login"
 import SignUp from "./components/LoginRegister/Register/Register"
 
@@ -16,20 +20,7 @@ function App() {
   return (
     <div >
        <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">login</Link>
-            </li>
-            <li>
-              <Link to="/signup">signup</Link>
-            </li>
-          </ul>
-        </nav>
+         <NavBar/>
         <Switch>
         <Route path="/" exact>
           </Route>
@@ -40,7 +31,7 @@ function App() {
            {/* <SignUp/> */}
           </Route>
           </Switch>
-      </div>
+      {/* </div> */}
     </Router>
     </div>
   );
