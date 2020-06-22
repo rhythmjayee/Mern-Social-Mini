@@ -9,6 +9,8 @@ import {
   Link
 } from "react-router-dom";
 
+import {Container,Row,Col} from "react-bootstrap";
+
 
 import './App.css';
 
@@ -21,17 +23,24 @@ function App() {
     <div >
        <Router>
          <NavBar/>
-        <Switch>
+         <Container style={{marginTop:"100px"}}>
+          <Row>
+            <Col>
+            <Switch>
         <Route path="/" exact>
           </Route>
+          
         <Route path="/login" exact>
-          {/* <Login/> */}
+          <Login/>
           </Route>
           <Route path="/signup" exact>
-           {/* <SignUp/> */}
+           <SignUp/>
           </Route>
           </Switch>
-      {/* </div> */}
+            </Col>
+          </Row>
+        </Container>
+      
     </Router>
     </div>
   );

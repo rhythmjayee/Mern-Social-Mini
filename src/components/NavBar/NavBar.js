@@ -18,7 +18,7 @@ const NavBar=()=>{
 
             textDecoration:"none",
             padding:"10px",
-            boxShadow: '0 2px 3px #7bff56',
+            boxShadow: '0 3px 3px #7bff56',
         },
         brand:{
             color:"#29ff00",
