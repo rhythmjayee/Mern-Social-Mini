@@ -19,9 +19,9 @@ export const getPosts = () => (dispatch) => {
         payload: res.data
       })
     )
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    // .catch(err =>
+    //   dispatch(returnErrors(err.response.data, err.response.status))
+    // );
 };
 
 export const addPost = (post) => (
@@ -29,16 +29,18 @@ export const addPost = (post) => (
   getState
 ) => {
   axios
-    .post('/api/posts', post, tokenConfig(getState))
+    .post('/api/posts', post, 
+    // tokenConfig(getState)
+    )
     .then(res =>
       dispatch({
         type: ADD_POST,
         payload: res.data
       })
     )
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    // .catch(err =>
+    //   dispatch(returnErrors(err.response.data, err.response.status))
+    // );
 };
 
 export const deletePost = (id) => (
@@ -46,16 +48,18 @@ export const deletePost = (id) => (
   getState
 ) => {
   axios
-    .delete(`/api/posts/${id}`, tokenConfig(getState))
+    .delete(`/api/posts/${id}`,
+    //  tokenConfig(getState)
+     )
     .then(res =>
       dispatch({
         type: DELETE_POST,
         payload: id
       })
     )
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    // .catch(err =>
+    //   dispatch(returnErrors(err.response.data, err.response.status))
+    // );
 };
 
 export const setPostsLoading = () => {

@@ -5,7 +5,8 @@ import {connect} from "react-redux";
 import {Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 
 import Post from "./Post/Post"
-import {getPosts,addPost,deletePost,setPostsLoading} from "../../actions/postAction"
+import {getPosts,
+    addPost,deletePost,setPostsLoading} from "../../actions/postAction"
 
 const Home=(props)=>{
 
@@ -29,11 +30,13 @@ const Home=(props)=>{
             fontWeight:"bold",
             backgroundColor:"#0c0c0C",
             border:"2px solid #0c0c0C",
+            borderRadius:"50px"
         },
         card:{
             boxShadow: ' 3px 3px #0c0c0C',
             width:"90%",
-            margin: "0 auto"
+            margin: "0 auto",
+            border:"2px solid"
         },
         cbody:{
             backgroundColor:"#333333",
