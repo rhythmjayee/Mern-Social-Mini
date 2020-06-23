@@ -17,6 +17,7 @@ import './App.css';
 import NavBar from "./components/NavBar/NavBar"
 import Login from "./components/LoginRegister/Login/Login"
 import SignUp from "./components/LoginRegister/Register/Register"
+import Home from "./components/Home/Home";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Col>
             <Switch>
         <Route path="/" exact>
+          <Home/>
           </Route>
           
         <Route path="/login" exact>

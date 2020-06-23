@@ -39,7 +39,7 @@ const NavBar=()=>{
   <Navbar.Toggle  style={styles.toggle} aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
   <Nav className="mr-auto">
-      <Link style={styles.link}  to="/home">Home</Link>
+      <Link style={styles.link}  to="/profile">Profile</Link>
       <Link  style={styles.link} to="/people">People</Link>
     </Nav>
     <Nav>
