@@ -9,10 +9,10 @@ import {
 // import { tokenConfig } from './authActions';
 // import { returnErrors } from './errorActions';
 
-export const getPosts = () => (dispatch) => {
+export const getPosts = (id) => (dispatch) => {
   dispatch(setPostsLoading());
   axios
-    .get('/api/posts')
+    .get(`/user/post/${id}`)
     .then(res =>
       dispatch({
         type: GET_POSTS,
@@ -29,7 +29,7 @@ export const addPost = (post) => (
   getState
 ) => {
   axios
-    .post('/api/posts', post, 
+    .post('/user/post/add', post, 
     // tokenConfig(getState)
     )
     .then(res =>
@@ -48,7 +48,7 @@ export const deletePost = (id) => (
   getState
 ) => {
   axios
-    .delete(`/api/posts/${id}`,
+    .delete(`/user/post/${id}`,
     //  tokenConfig(getState)
      )
     .then(res =>

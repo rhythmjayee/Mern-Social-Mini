@@ -1,14 +1,15 @@
-import React from "react";
+import React,{useState} from "react";
 import Radium from 'radium';
 import {connect} from "react-redux";
 
 import {Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 
 import Post from "./Post/Post"
-import {getPosts,
-    addPost,deletePost,setPostsLoading} from "../../actions/postAction"
+import {addPost,setPostsLoading} from "../../actions/postAction"
 
 const Home=(props)=>{
+
+        const [input, setInput] = useState('');
 
     const styles={
         lightgreenColor:{
@@ -52,7 +53,22 @@ const Home=(props)=>{
 
     }
 
-    const {posts}=props.post;
+
+    const handleChangeInput=(e)=>{
+        setInput(e.target.value);
+    }
+
+
+    const addPostHandler=(e)=>{
+        e.peventDefault();
+
+        const newPost = {
+            input
+          };
+       addPost(newPost);
+    }
+
+    let posts=props.post.posts;
 
     return(
         <>
@@ -62,12 +78,12 @@ const Home=(props)=>{
             <Card style={styles.card} className="text-center">
             <Card.Header style={styles.header}>Write a Post</Card.Header>
             <Card.Body style={styles.cbody}>
-            <Form>
+            <Form onSubmit={addPostHandler}>
             <Form.Group controlId="formBasicname">
-                    <Form.Control style={styles.FormControl} type="text" placeholder="write here..." />
+                    <Form.Control style={styles.FormControl} type="text" onChange={handleChangeInput} placeholder="write here..." />
             </Form.Group>
             <Button variant="primary" style={styles.button} >Post</Button>
-                </Form>
+             </Form>
         </Card.Body>
         </Card>
             </Col>
@@ -77,7 +93,7 @@ const Home=(props)=>{
     <Container>
         <Row>
             <Col>
-            <Post/>
+            <Post />
             </Col>
         </Row>
     </Container>
@@ -91,4 +107,4 @@ post:state.post
 })
 
 
-export default connect(mapStateToProps,{getPosts})(Radium(Home));
+export default connect(mapStateToProps,{addPost})(Radium(Home));

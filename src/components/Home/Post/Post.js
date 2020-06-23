@@ -1,10 +1,13 @@
 import React from "react";
 import Radium from 'radium';
+import {connect} from "react-redux";
+import {getPosts,addPost,deletePost,setPostsLoading} from "../../../actions/postAction"
+
 
 import {Accordion,Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 
 
-const Post=()=>{
+const Post=(props)=>{
     const styles={
         lightgreenColor:{
             color:"#29ff00"
@@ -66,62 +69,71 @@ const Post=()=>{
         }
 
     }
+    console.log(props.post.posts);
+
 return(
     <Container>
     <Row>
-        <Col>
-        <Accordion defaultActiveKey="1">
-        <Card style={styles.header}> 
-        <Card.Body style={styles.header}>
-        <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>User Name</Card.Title>
-        <Card.Text style={styles.cbody}>
-       User Article body
-        </Card.Text>
-        <Button style={styles.btn}>{" 10 "}<i className="fa fa-thumbs-up"> Likes</i></Button>
-        <Button style={styles.btn}>{" 3 "}<i className="fa fa-book"> Comments</i></Button>
+        
+        {props.post.posts.map((p,index)=>{
+           return<Col key={index} sm={12}> <Accordion style={{marginTop:"50px"}} defaultActiveKey="1">
+            <Card style={styles.header}> 
+            <Card.Body style={styles.header}>
+            <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>User Name</Card.Title>
+            <Card.Text style={styles.cbody}>
+            User Article body{p.body}
+            </Card.Text>
+            <Button style={styles.btn}>{" 10 "}<i className="fa fa-thumbs-up"> Likes</i></Button>
+            <Button style={styles.btn}>{" 3 "}<i className="fa fa-book"> Comments</i></Button>
 
-    </Card.Body>
-            <Accordion.Toggle as={Card.Header} style={styles.commentA}  eventKey="0">
-            <Button style={styles.btn}><i className="fa fa-arrow-down"></i></Button>         
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="0">
-            <Card.Body style={styles.comments} >
-                <Container className="m-3">
-                    <Row>
-                        <Col sm>
-                        <Card.Body style={styles.header}>
-                        <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>User Name</Card.Title>
+            </Card.Body>
+                <Accordion.Toggle as={Card.Header} style={styles.commentA}  eventKey="0">
+                <Button style={styles.btn}><i className="fa fa-arrow-down"></i></Button>         
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                <Card.Body style={styles.comments} >
+                    <Container className="m-3">
+                        <Row>
+                            <Col sm>
+                            <Card.Body style={styles.header}>
+                            <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>User Name</Card.Title>
 
-                            <Card.Text style={styles.cbody}>
-                            User Article body
-                            </Card.Text> 
-                        </Card.Body>
+                                <Card.Text style={styles.cbody}>
+                                User Article body
+                                </Card.Text> 
+                            </Card.Body>
+                            
+                            </Col>
+                        </Row>
+                    </Container>
                         
+                <Form>
+                    <Row>
+                        <Col sm={10}>
+                        <Form.Control  style={styles.header} type="text" placeholder="type here...." />
+                        </Col>
+                        <Col sm>
+                        <Button style={{backgroundColor:"#0c0c0C",color:"#29ff00",borderRadius:"50px", border:"2px solid #29ff00"}}>add</Button>                    
                         </Col>
                     </Row>
-                </Container>
-                   
-            <Form>
-                <Row>
-                    <Col sm={10}>
-                    <Form.Control  style={styles.header} type="text" placeholder="type here...." />
-                    </Col>
-                    <Col sm>
-                    <Button style={{backgroundColor:"#0c0c0C",color:"#29ff00",borderRadius:"50px", border:"2px solid #29ff00"}}>add</Button>                    
-                    </Col>
-                </Row>
-                </Form>
-            </Card.Body>
-            </Accordion.Collapse>
-        </Card>
-        </Accordion>
-        </Col>
+                    </Form>
+                </Card.Body>
+                </Accordion.Collapse>
+            </Card>
+            </Accordion></Col>
+        })}
+       
+        
     </Row>
 </Container>
 )
 }
 
+const mapStateToProps=(state)=>({
+    post:state.post
+})
+    
+    
 
 
-
-export default Radium(Post);
+export default connect(mapStateToProps,{getPosts,deletePost})(Radium(Post));
