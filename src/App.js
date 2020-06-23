@@ -9,6 +9,9 @@ import {
   Link
 } from "react-router-dom";
 
+import {Provider} from "react-redux";
+import store from "./store";
+
 import {Container,Row,Col} from "react-bootstrap";
 
 
@@ -21,6 +24,7 @@ import Home from "./components/Home/Home";
 
 function App() {
   return (
+    <Provider store={store}>
     <div >
        <Router>
          <NavBar/>
@@ -45,6 +49,7 @@ function App() {
       
     </Router>
     </div>
+    </Provider>
   );
 }
 

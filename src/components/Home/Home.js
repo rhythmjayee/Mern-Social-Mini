@@ -1,11 +1,13 @@
 import React from "react";
 import Radium from 'radium';
+import {connect} from "react-redux";
 
 import {Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 
 import Post from "./Post/Post"
+import {getPosts,addPost,deletePost,setPostsLoading} from "../../actions/postAction"
 
-const Home=()=>{
+const Home=(props)=>{
 
     const styles={
         lightgreenColor:{
@@ -47,6 +49,7 @@ const Home=()=>{
 
     }
 
+    const {posts}=props.post;
 
     return(
         <>
@@ -80,4 +83,9 @@ const Home=()=>{
 }
 
 
-export default Radium(Home);
+const mapStateToProps=(state)=>({
+post:state.post
+})
+
+
+export default connect(mapStateToProps,{getPosts})(Radium(Home));
