@@ -1,9 +1,8 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 
@@ -18,6 +17,8 @@ import NavBar from "../NavBar/NavBar"
 import Login from "../LoginRegister/Login/Login"
 import SignUp from "../LoginRegister/Register/Register"
 import Home from "../Home/Home";
+import Profile from "../Profile/Profile"
+import AllUsers from "../AllUsers/AllUsers"
 
 function Root(props) {
 
@@ -31,18 +32,16 @@ function Root(props) {
             <Col>
             <Switch>
           <Route path="/" exact>
-              {/* <Home/> */}
+          {/* <Redirect  to="/profile"/> */}
          {props.auth?<Home/>:<Redirect from="/" to="/login"/>} 
-         {/* {console.log(store.getState().auth)}
-         {console.log(isAuthenticated)} */}
           </Route>
 
-          {/* <Route path="/profile" exact>
-         {isAuthenticate?<Home/>:<Redirect to="/login"/>} 
+          <Route path="/profile" exact>
+         {props.auth?<Profile/>:<Redirect to="/login"/>} 
           </Route>
           <Route path="/people" exact>
-         {isAuthenticate?<Home/>:<Redirect to="/login"/>} 
-          </Route> */}
+         {props.auth?<AllUsers/>:<Redirect to="/login"/>} 
+          </Route>
          
 
           

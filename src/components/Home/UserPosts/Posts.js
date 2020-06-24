@@ -1,12 +1,11 @@
-import React, { useState,useEffect,useCallback } from "react";
-import Radium from 'radium';
+import React, { useEffect,useCallback } from "react";
 import {connect} from "react-redux";
-import {getPosts,addPost,deletePost,setPostsLoading} from "../../../actions/postAction"
+import {getPosts,deletePost,setPostsLoading} from "../../../actions/postAction"
 
 
-import {Accordion,Card,Button,Container,Row,Col,Form} from "react-bootstrap"
+import {Container,Row} from "react-bootstrap"
 
-import Post from "../Post/Post";
+import Post from "../UserPost/Post";
 
 
 const Posts=(props)=>{

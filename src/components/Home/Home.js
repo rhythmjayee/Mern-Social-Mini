@@ -5,9 +5,8 @@ import {connect} from "react-redux";
 
 import {Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 
-import Posts from "./Posts/Posts"
+import Posts from "./UserPosts/Posts"
 import {addPost,setPostsLoading} from "../../actions/postAction"
-import { Redirect } from "react-router-dom";
 
 const Home=(props)=>{
 
@@ -84,7 +83,7 @@ const Home=(props)=>{
             <Card.Body style={styles.cbody}>
             <Form onSubmit={addPostHandler}>
             <Form.Group controlId="formBasicname">
-                    <Form.Control style={styles.FormControl} type="text" onChange={handleChangeInput} placeholder="write here..." />
+                    <Form.Control style={styles.FormControl} type="text" onChange={handleChangeInput} placeholder="write here..." autoComplete="off"/>
             </Form.Group>
             <Button type="submit" variant="primary" style={styles.button} >Post</Button>
              </Form>
@@ -107,7 +106,6 @@ const Home=(props)=>{
 
 
 const mapStateToProps=(state)=>({
-auth:state.auth,
 post:state.post
 })
 

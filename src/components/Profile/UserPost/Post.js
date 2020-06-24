@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useCallback } from "react";
+import React from "react";
 import Radium from 'radium';
 
 
@@ -81,6 +81,7 @@ return(
             </Card.Text>
             <Button style={styles.btn}>{props.info.likes}  <i className="fa fa-thumbs-up"> Likes</i></Button>
             <Button style={styles.btn}>{" 3 "}    <i className="fa fa-book"> Comments</i></Button>
+            <Button style={styles.btn}><i className="fa fa-trash"></i></Button>
 
             </Card.Body>
                 <Accordion.Toggle as={Card.Header} style={styles.commentA}  eventKey="0">

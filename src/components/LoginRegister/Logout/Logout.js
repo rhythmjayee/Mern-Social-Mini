@@ -4,7 +4,6 @@ import { NavLink } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Radium from 'radium';
 
-import {Redirect} from "react-router-dom"
 import { logout } from '../../../actions/authAction';
 
 export const Logout = (props) => {
