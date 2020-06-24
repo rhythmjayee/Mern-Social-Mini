@@ -8,6 +8,7 @@ import {Link, Redirect} from "react-router-dom"
 import {connect} from "react-redux";
 
 import {login} from "../../../actions/authAction"
+import {clearErrors} from "../../../actions/errorAction"
 
 const Login=(props)=>{
 
@@ -56,6 +57,7 @@ const Login=(props)=>{
     const [errorM,setError]=useState(null);
 
     let {error}=props;
+
     useEffect(()=>{
         // let {error}=props;
         // console.log(error);
@@ -88,14 +90,17 @@ const Login=(props)=>{
           };
 
           props.login(User);
-          
+          props.clearErrors();
          
 
     }
 
-    // if(props.isAuthenticated){
-    //     return <Redirect from="/login" to="/"></Redirect>
-    // }
+    if(props.auth){
+        console.log("login......");
+        // props.clearErrors();
+        console.log(error);
+        return <Redirect from="/login" to="/"></Redirect>
+    }
 
 
   
@@ -136,8 +141,8 @@ const Login=(props)=>{
 
 
 const mapStateToProps=state=>({
-    isAuthenticated:state.auth.isAuthenticated,
+    auth:state.auth.isAuthenticated,
     error:state.error
 })
 
-export default connect(mapStateToProps,{login})(Radium(Login));
+export default connect(mapStateToProps,{login,clearErrors})(Radium(Login));

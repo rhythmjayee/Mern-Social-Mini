@@ -55,7 +55,6 @@ const NavBar=(props)=>{
         <React.Fragment>
     <Nav className="ml-auto">
     <Link  style={styles.link} to="/login">Login</Link>
-    {/* <Link  style={styles.link} to="/logout">Logout</Link> */}
     <Link   style={styles.link} to="/signup">SignUp</Link>
     </Nav>
     </React.Fragment>

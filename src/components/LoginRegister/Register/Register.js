@@ -77,14 +77,12 @@ const Register=(props)=>{
             ...prev,
             [name]:val
         }));
-        // props.clearErrors();
 
     }
 
     const registerHandler=(e)=>{
         props.clearErrors();
         e.preventDefault();
-        // setError(error.msg.message);
 
 
         const newUser = {
@@ -93,11 +91,15 @@ const Register=(props)=>{
             password:input.password
           };
           props.register(newUser);
+          props.clearErrors();
+
     }
 
-    // if(props.isAuthenticated){
-    //     return <Redirect from="/signup" to="/"></Redirect>
-    // }
+    if(props.auth){
+        console.log("register......");
+        console.log(error);
+        return <Redirect from="/signup" to="/"></Redirect>
+    }
 
     return(
     <Container >
@@ -135,7 +137,7 @@ const Register=(props)=>{
 }
 
 const mapStateToProps=state=>({
-    isAuthenticated:state.auth.isAuthenticated,
+    auth:state.auth.isAuthenticated,
     error:state.error
 })
 
