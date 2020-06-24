@@ -2,10 +2,12 @@ import React,{useState} from "react";
 import Radium from 'radium';
 import {connect} from "react-redux";
 
+
 import {Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 
 import Post from "./Post/Post"
 import {addPost,setPostsLoading} from "../../actions/postAction"
+import { Redirect } from "react-router-dom";
 
 const Home=(props)=>{
 
@@ -68,7 +70,11 @@ const Home=(props)=>{
        addPost(newPost);
     }
 
-    let posts=props.post.posts;
+    // let posts=props.post.posts;
+
+    // if(!props.isAuthenticated){
+    //     return <Redirect  to="/login"/>
+    // }
 
     return(
         <>
@@ -107,4 +113,4 @@ post:state.post
 })
 
 
-export default connect(mapStateToProps,{addPost})(Radium(Home));
+export default connect(null,{addPost})(Radium(Home));

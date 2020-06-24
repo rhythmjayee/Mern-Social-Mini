@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import Radium from 'radium';
 
 
-import {Card,Button,Container,Row,Col,Form} from "react-bootstrap"
+import {Card,Button,Container,Row,Col,Form,Alert} from "react-bootstrap"
 
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
+import {connect} from "react-redux";
 
-const Login=()=>{
+import {login} from "../../../actions/authAction"
+
+const Login=(props)=>{
 
     const styles={
         lightgreenColor:{
@@ -42,6 +45,60 @@ const Login=()=>{
         }
 
     }
+   
+
+
+    const [input,setInput]=useState({
+        email:'',
+        password:''
+    })
+
+    const [errorM,setError]=useState(null);
+
+    let {error}=props;
+    useEffect(()=>{
+        // let {error}=props;
+        // console.log(error);
+
+        if(error){
+            if(error.id==="LOGIN_FAIL"){
+                setError(error.msg.message);
+                console.log(error.msg.message);
+
+            }
+        }
+    },[error])
+
+
+    const handleChangeInput=(e)=>{
+        let val=e.target.value;
+        let name=e.target.name;
+        setInput(prev=>({
+            ...prev,
+            [name]:val
+        }));
+    }
+
+    const loginHandler=(e)=>{
+        e.preventDefault();
+
+        const User = {
+            email:input.email,
+            password:input.password
+          };
+
+          props.login(User);
+          
+         
+
+    }
+
+    // if(props.isAuthenticated){
+    //     return <Redirect from="/login" to="/"></Redirect>
+    // }
+
+
+  
 
     return(
     <Container >
@@ -50,20 +107,20 @@ const Login=()=>{
             <Card style={styles.card} className="text-center">
             <Card.Header style={styles.header}>Login</Card.Header>
             <Card.Body style={styles.cbody}>
-            <Form>
+            {errorM && <Alert style={{background:"#0c0c0C"}} color="danger">{errorM}</Alert>}
+
+            <Form onSubmit={loginHandler}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control style={styles.FormControl} type="email" placeholder="Enter email" />
+                    <Form.Control style={styles.FormControl} name="email" onChange={handleChangeInput} value={input.email} type="email" placeholder="Enter email" />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control style={styles.FormControl} type="password" placeholder="Password" />
+                    <Form.Control style={styles.FormControl} type="password" name="password" onChange={handleChangeInput} value={input.password} placeholder="Password" />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Remember me" />
-                </Form.Group>
-                <Button variant="primary" style={styles.button} >Submit</Button>
+          
+                <Button type="submit" variant="primary" style={styles.button} >Submit</Button>
 
                 </Form>
         </Card.Body>
@@ -77,4 +134,10 @@ const Login=()=>{
 }
 
 
-export default Radium(Login);
+
+const mapStateToProps=state=>({
+    isAuthenticated:state.auth.isAuthenticated,
+    error:state.error
+})
+
+export default connect(mapStateToProps,{login})(Radium(Login));

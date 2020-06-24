@@ -6,22 +6,22 @@ import {
     POSTS_LOADING
   } from './types';
   
-// import { tokenConfig } from './authActions';
-// import { returnErrors } from './errorActions';
+import { tokenConfig } from './authAction';
+import { returnErrors } from './errorAction';
 
 export const getPosts = (id) => (dispatch) => {
   dispatch(setPostsLoading());
   axios
-    .get(`/user/post/${id}`)
+    .get(`http://localhost:5000/api/user/post/${id}`)
     .then(res =>
       dispatch({
         type: GET_POSTS,
         payload: res.data
       })
     )
-    // .catch(err =>
-    //   dispatch(returnErrors(err.response.data, err.response.status))
-    // );
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 export const addPost = (post) => (
@@ -29,8 +29,8 @@ export const addPost = (post) => (
   getState
 ) => {
   axios
-    .post('/user/post/add', post, 
-    // tokenConfig(getState)
+    .post('http://localhost:5000/api/user/post/add', post, 
+    tokenConfig(getState)
     )
     .then(res =>
       dispatch({
@@ -38,9 +38,9 @@ export const addPost = (post) => (
         payload: res.data
       })
     )
-    // .catch(err =>
-    //   dispatch(returnErrors(err.response.data, err.response.status))
-    // );
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 export const deletePost = (id) => (
@@ -48,8 +48,8 @@ export const deletePost = (id) => (
   getState
 ) => {
   axios
-    .delete(`/user/post/${id}`,
-    //  tokenConfig(getState)
+    .delete(`http://localhost:5000/api/user/post/${id}`,
+     tokenConfig(getState)
      )
     .then(res =>
       dispatch({
@@ -57,10 +57,10 @@ export const deletePost = (id) => (
         payload: id
       })
     )
-    // .catch(err =>
-    //   dispatch(returnErrors(err.response.data, err.response.status))
-    // );
-};
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+}; 
 
 export const setPostsLoading = () => {
   return {

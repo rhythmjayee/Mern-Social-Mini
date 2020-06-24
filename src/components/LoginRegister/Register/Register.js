@@ -1,12 +1,16 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Radium from 'radium';
+import {connect} from "react-redux";
 
 
-import {Card,Button,Container,Row,Col,Form} from "react-bootstrap"
+import {Card,Button,Container,Row,Col,Form,Alert} from "react-bootstrap"
 
-import {Link} from "react-router-dom"
+import {Link,Redirect} from "react-router-dom"
 
-const Login=()=>{
+import {register} from "../../../actions/authAction"
+import {clearErrors} from "../../../actions/errorAction"
+
+const Register=(props)=>{
 
     const styles={
         lightgreenColor:{
@@ -43,6 +47,58 @@ const Login=()=>{
 
     }
 
+    const [input,setInput]=useState({
+        name:'',
+        email:'',
+        password:''
+    });
+
+    const [errorM,setError]=useState(null);
+
+
+    let {error}=props;
+    useEffect(()=>{
+        // let {error}=props;
+        // console.log(error);
+
+        if(error){
+            if(error.id==="REGISTER_FAIL"){
+                setError(error.msg.message);
+                console.log(error.msg.message);
+
+            }
+        }
+    },[error])
+
+    const handleChangeInput=(e)=>{
+        let val=e.target.value;
+        let name=e.target.name;
+        setInput(prev=>({
+            ...prev,
+            [name]:val
+        }));
+        // props.clearErrors();
+
+    }
+
+    const registerHandler=(e)=>{
+        props.clearErrors();
+        e.preventDefault();
+        // setError(error.msg.message);
+
+
+        const newUser = {
+            name:input.name,
+            email:input.email,
+            password:input.password
+          };
+          props.register(newUser);
+    }
+
+    // if(props.isAuthenticated){
+    //     return <Redirect from="/signup" to="/"></Redirect>
+    // }
+
     return(
     <Container >
         <Row>
@@ -50,24 +106,22 @@ const Login=()=>{
             <Card style={styles.card} className="text-center">
             <Card.Header style={styles.header}>SignUp</Card.Header>
             <Card.Body style={styles.cbody}>
-            <Form>
+            {errorM && <Alert style={{background:"#0c0c0C"}} color="danger">{errorM}</Alert>}
+            <Form onSubmit={registerHandler}>
             <Form.Group controlId="formBasicname">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control style={styles.FormControl} type="text" placeholder="Enter name..." />
+                    <Form.Control style={styles.FormControl} type="text" name="name" onChange={handleChangeInput} placeholder="Enter name..." />
                 </Form.Group>
-                <Form.Group controlId="formBasicname">
+                <Form.Group controlId="formBasicemail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control style={styles.FormControl} type="email" placeholder="Enter email..." />
+                    <Form.Control style={styles.FormControl} type="email" name="email" onChange={handleChangeInput} placeholder="Enter email..." />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control style={styles.FormControl} type="password" placeholder="Password" />
+                    <Form.Control style={styles.FormControl} type="password" name="password" onChange={handleChangeInput} placeholder="Password" />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Remember me" />
-                </Form.Group>
-                <Button variant="primary" style={styles.button} >Submit</Button>
+                <Button type="submit" variant="primary" style={styles.button} >Submit</Button>
 
                 </Form>
         </Card.Body>
@@ -80,5 +134,10 @@ const Login=()=>{
     )
 }
 
+const mapStateToProps=state=>({
+    isAuthenticated:state.auth.isAuthenticated,
+    error:state.error
+})
 
-export default Radium(Login);
+
+export default connect(mapStateToProps,{register,clearErrors})(Radium(Register));
