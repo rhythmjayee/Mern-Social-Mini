@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useState,useEffect,useCallback } from "react";
 import Radium from 'radium';
-import {connect} from "react-redux";
-import {getPosts,addPost,deletePost,setPostsLoading} from "../../../actions/postAction"
 
 
 import {Accordion,Card,Button,Container,Row,Col,Form} from "react-bootstrap"
@@ -69,22 +67,20 @@ const Post=(props)=>{
         }
 
     }
-    console.log(props.post.posts);
 
 return(
     <Container>
     <Row>
         
-        {props.post.posts.map((p,index)=>{
-           return<Col key={index} sm={12}> <Accordion style={{marginTop:"50px"}} defaultActiveKey="1">
+       <Col sm={12}> <Accordion style={{marginTop:"50px"}} defaultActiveKey="1">
             <Card style={styles.header}> 
             <Card.Body style={styles.header}>
-            <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>User Name</Card.Title>
+        <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>User Name{props.info.creator}</Card.Title>
             <Card.Text style={styles.cbody}>
-            User Article body{p.body}
+            User Article body{props.info.body}
             </Card.Text>
-            <Button style={styles.btn}>{" 10 "}<i className="fa fa-thumbs-up"> Likes</i></Button>
-            <Button style={styles.btn}>{" 3 "}<i className="fa fa-book"> Comments</i></Button>
+            <Button style={styles.btn}>{props.info.likes}  <i className="fa fa-thumbs-up"> Likes</i></Button>
+            <Button style={styles.btn}>{" 3 "}    <i className="fa fa-book"> Comments</i></Button>
 
             </Card.Body>
                 <Accordion.Toggle as={Card.Header} style={styles.commentA}  eventKey="0">
@@ -121,7 +117,7 @@ return(
                 </Accordion.Collapse>
             </Card>
             </Accordion></Col>
-        })}
+    
        
         
     </Row>
@@ -129,11 +125,8 @@ return(
 )
 }
 
-const mapStateToProps=(state)=>({
-    post:state.post
-})
     
     
 
 
-export default connect(mapStateToProps,{getPosts,deletePost})(Radium(Post));
+export default (Radium(Post));

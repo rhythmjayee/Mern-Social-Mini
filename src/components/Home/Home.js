@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 import {Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 
-import Post from "./Post/Post"
+import Posts from "./Posts/Posts"
 import {addPost,setPostsLoading} from "../../actions/postAction"
 import { Redirect } from "react-router-dom";
 
@@ -62,19 +62,17 @@ const Home=(props)=>{
 
 
     const addPostHandler=(e)=>{
-        e.peventDefault();
+        e.preventDefault();
 
         const newPost = {
-            input
+            body:input,
+            creator:props.auth.user._id
           };
-       addPost(newPost);
+          console.log(newPost);
+       props.addPost(newPost);
     }
 
-    // let posts=props.post.posts;
 
-    // if(!props.isAuthenticated){
-    //     return <Redirect  to="/login"/>
-    // }
 
     return(
         <>
@@ -88,7 +86,7 @@ const Home=(props)=>{
             <Form.Group controlId="formBasicname">
                     <Form.Control style={styles.FormControl} type="text" onChange={handleChangeInput} placeholder="write here..." />
             </Form.Group>
-            <Button variant="primary" style={styles.button} >Post</Button>
+            <Button type="submit" variant="primary" style={styles.button} >Post</Button>
              </Form>
         </Card.Body>
         </Card>
@@ -99,7 +97,7 @@ const Home=(props)=>{
     <Container>
         <Row>
             <Col>
-            <Post />
+            {/* <Posts /> */}
             </Col>
         </Row>
     </Container>
@@ -109,8 +107,9 @@ const Home=(props)=>{
 
 
 const mapStateToProps=(state)=>({
+auth:state.auth,
 post:state.post
 })
 
 
-export default connect(null,{addPost})(Radium(Home));
+export default connect(mapStateToProps,{addPost})(Radium(Home));

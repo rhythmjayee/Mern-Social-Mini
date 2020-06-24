@@ -32,11 +32,14 @@ export const addPost = (post) => (
     .post('http://localhost:5000/api/user/post/add', post, 
     tokenConfig(getState)
     )
-    .then(res =>
+    .then(res =>{
       dispatch({
         type: ADD_POST,
         payload: res.data
       })
+      // console.log(res.data)
+    }
+      
     )
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
