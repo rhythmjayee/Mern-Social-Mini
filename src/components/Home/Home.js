@@ -106,6 +106,7 @@ const Home=(props)=>{
 
 
 const mapStateToProps=(state)=>({
+auth:state.auth,
 post:state.post
 })
 

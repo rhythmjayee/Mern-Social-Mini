@@ -2,12 +2,12 @@ import React from "react";
 import {Card,Button,Container,Row,Col} from "react-bootstrap"
 import Radium from 'radium';
 
-
+import {connect} from "react-redux";
 
 import Posts from "./UserPosts/Posts"
 
 
-const Profile=()=>{
+const Profile=(props)=>{
     const styles={
         lightgreenColor:{
             color:"#29ff00"
@@ -57,7 +57,7 @@ const Profile=()=>{
                     <Card style={styles.header} className="text-center">
                         <Card.Header><i className="fa fa-user"></i>  Profile</Card.Header>
                         <Card.Body style={styles.cbody}>
-                            <Card.Title style={styles.cbody}>User NAme</Card.Title>
+                            <Card.Title style={styles.cbody}>{props.user.name}</Card.Title>
                             {/* <Card.Text style={styles.cbody}>
                             With supporting text below as a natural lead-in to additional content.
                             </Card.Text> */}
@@ -69,7 +69,7 @@ const Profile=()=>{
                                     
                                 </Col>
                                 <Col>
-                                    <Button size="lg" style={styles.button} block><i className="fa fa-file-text-o"> Posts</i></Button>
+                                    <Button size="lg" style={styles.button} block>{props.user.posts.length}   <i className="fa fa-file-text-o"> Posts</i></Button>
                                     
 
                                 </Col>
@@ -108,6 +108,9 @@ const Profile=()=>{
 
 
 
+const mapStateToProps=(state)=>({
+user:state.auth.user
+})
 
 
 
@@ -116,5 +119,4 @@ const Profile=()=>{
 
 
 
-
-export default Radium(Profile);
+export default connect(mapStateToProps,null)(Radium(Profile));

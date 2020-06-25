@@ -28,6 +28,7 @@ export const addPost = (post) => (
   dispatch,
   getState
 ) => {
+  dispatch(setPostsLoading());
   axios
     .post('http://localhost:5000/api/user/post/add', post, 
     tokenConfig(getState)
@@ -50,6 +51,7 @@ export const deletePost = (id) => (
   dispatch,
   getState
 ) => {
+  dispatch(setPostsLoading());
   axios
     .delete(`http://localhost:5000/api/user/post/${id}`,
      tokenConfig(getState)
