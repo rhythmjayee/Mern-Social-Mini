@@ -48,11 +48,14 @@ export const register = ({ name, email, password }) => (
 
   axios
     .post('http://localhost:5000/api/auth/signup', body, config)
-    .then(res =>
+    .then(res =>{
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
-      })
+      });
+      dispatch(loadUser());
+    }
+      
     )
     .catch(err => {
       dispatch(
