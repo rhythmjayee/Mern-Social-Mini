@@ -1,6 +1,6 @@
 import React, {useEffect,useCallback } from "react";
 import {connect} from "react-redux";
-import {getPosts,deletePost,setPostsLoading} from "../../../actions/postAction"
+import {getPosts,deletePost} from "../../../actions/postAction"
 
 
 import {Container,Row,Col} from "react-bootstrap";
@@ -32,12 +32,7 @@ const Posts=(props)=>{
 
     }
 
-    // let UserPosts=
-    // <>
-    //     props.post.posts.map((p)=>{
-    //         return<Post key={p._id} info={p} delete={onDeletePostHandler}/>
-    //     }
-    // </>
+
     let UserPosts;
     if(props.post.posts.length===0){
         UserPosts=<h4 
