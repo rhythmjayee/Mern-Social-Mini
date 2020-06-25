@@ -1,6 +1,6 @@
 import React, { useEffect,useCallback } from "react";
 import {connect} from "react-redux";
-import {getPosts,deletePost,setPostsLoading} from "../../../actions/postAction"
+import {getPosts,deletePost} from "../../../actions/postAction"
 
 
 import {Container,Row} from "react-bootstrap"
