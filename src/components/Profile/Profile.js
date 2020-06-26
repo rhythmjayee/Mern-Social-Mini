@@ -74,7 +74,7 @@ const Profile=(props)=>{
 
                                 </Col>
                                 <Col>
-                                    <Button size="lg" style={styles.button} block>{props.user.followings.length}  <i className="fa fa-users">Followings</i></Button>
+                                    <Button size="lg" style={styles.button} block>{props.user.followings.length}    <i className="fa fa-users">Followings</i></Button>
                                     
 
                                 </Col>

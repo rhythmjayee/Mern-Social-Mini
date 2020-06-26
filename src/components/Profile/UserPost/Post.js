@@ -79,8 +79,8 @@ return(
             <Card.Text style={styles.cbody}>
             {props.info.body}
             </Card.Text>
-            <Button style={styles.btn}>{props.info.likes}  <i className="fa fa-thumbs-up"> Likes</i></Button>
-            <Button style={styles.btn}>{" 3 "}    <i className="fa fa-book"> Comments</i></Button>
+            <Button style={styles.btn} disabled>{props.info.likes}  <i className="fa fa-thumbs-up"> Likes</i></Button>
+            <Button style={styles.btn} disabled>{" 3 "}    <i className="fa fa-book"> Comments</i></Button>
             <Button style={styles.btn} onClick={()=>props.delete(props.info._id)}><i className="fa fa-trash"></i></Button>
 
             </Card.Body>
