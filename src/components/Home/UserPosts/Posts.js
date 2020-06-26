@@ -1,9 +1,10 @@
 import React, { useEffect,useCallback } from "react";
 import {connect} from "react-redux";
-import {getPosts,deletePost} from "../../../actions/postAction"
+import {getPeoplePosts} from "../../../actions/postAction"
 
 
-import {Container,Row} from "react-bootstrap"
+import {Container,Row,Col} from "react-bootstrap"
+import Loader from 'react-loader-spinner'
 
 import Post from "../UserPost/Post";
 
@@ -12,22 +13,48 @@ const Posts=(props)=>{
    
 
     const innerFunction = useCallback(() => {
-        props.getPosts(props.user._id);
+        props.getPeoplePosts();
     },[]);
 
     useEffect(()=>{
             innerFunction();
-    },[innerFunction,props.getPosts])
+    },[innerFunction,props.getPeoplePosts])
 
-    console.log(props.post.posts);
+    console.log(props.post.peoplePosts);
+
+    let UsersPosts;
+    if(props.post.peoplePosts.length===0){
+        UsersPosts=<h4 
+        style={{textAlign:"center",
+        color:"#29ff00",
+        marginTop:"200px"}}>No Feeds found</h4>;
+    }
+    else{
+      let post=props.post.peoplePosts;
+      UsersPosts=post.map((p)=>{
+        return<Post key={p._id} info={p}/>
+     })
+           
+    }
 
 return(
     <Container>
     <Row>
-        
-        {props.post.posts.map((p)=>{
-           return<Post key={p._id} info={p}/>
-        })}
+
+        <Col>
+            
+            {!props.post.loading?   UsersPosts
+            :
+            <Loader
+            type="Circles"
+            color="#29ff00"
+            height={100}
+            width={100}
+            timeout={2000} //3 secs
+            style={{textAlign:"center"}} 
+        />
+        }
+        </Col>
        
         
     </Row>
@@ -43,4 +70,4 @@ const mapStateToProps=(state)=>({
     
 
 
-export default connect(mapStateToProps,{getPosts,deletePost})(Posts);
+export default connect(mapStateToProps,{getPeoplePosts})(Posts);

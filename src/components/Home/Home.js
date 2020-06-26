@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 import {Card,Button,Container,Row,Col,Form,Alert} from "react-bootstrap"
 
-// import Posts from "./UserPosts/Posts"
+import Posts from "./UserPosts/Posts"
 import {addPost} from "../../actions/postAction";
 import {clearErrors} from "../../actions/errorAction";
 
@@ -29,6 +29,7 @@ const Home=(props)=>{
         header:{
             backgroundColor:"#0c0c0C",
             color:"#29ff00",
+            // borderRadius:"50px"
             
         },
         button:{
@@ -42,11 +43,13 @@ const Home=(props)=>{
             boxShadow: ' 3px 3px #0c0c0C',
             width:"90%",
             margin: "0 auto",
-            border:"2px solid"
+            border:"2px solid",
+            // borderRadius:"50px"
         },
         cbody:{
             backgroundColor:"#333333",
             color:"#29ff00",
+            // borderRadius:"50px"
 
 
         },
@@ -59,6 +62,10 @@ const Home=(props)=>{
     }
 
     const [errorM,setError]=useState(null);
+    const [Mess,setMess]=useState(null);
+
+
+    // const[loading,setLoding]=useState(false);
 
     let {error}=props;
 
@@ -81,6 +88,7 @@ const Home=(props)=>{
 
     const addPostHandler=(e)=>{
         e.preventDefault();
+        // setLoding(true);
     
             const newPost = {
                 body:input,
@@ -90,6 +98,10 @@ const Home=(props)=>{
            props.addPost(newPost);
  
         props.clearErrors();
+        // setLoding(false);
+        setMess("POst Added!!!")
+
+
 
        
     }
@@ -105,6 +117,7 @@ const Home=(props)=>{
             <Card.Header style={styles.header}>Write a Post</Card.Header>
             <Card.Body style={styles.cbody}>
             {errorM && <Alert style={{background:"#0c0c0C"}} color="danger">{errorM}</Alert>}
+            {Mess && <Alert style={{background:"#0c0c0C"}} color="danger">{Mess}</Alert>}
             <Form onSubmit={addPostHandler}>
             <Form.Group controlId="formBasicname">
                     <Form.Control style={styles.FormControl} type="text" onChange={handleChangeInput} name="body" placeholder="write here..." autoComplete="off"/>
@@ -115,7 +128,8 @@ const Home=(props)=>{
         </Card>
             </Col>
             <Col>
-                {props.post.loading &&
+                {/* {
+                // loading &&
                  <Loader
                 type="Circles"
                 color="#29ff00"
@@ -123,15 +137,20 @@ const Home=(props)=>{
                 width={100}
                 timeout={2000} //3 secs
                 style={{textAlign:"center"}} 
-             />}
+             />} */}
             </Col>
         </Row>
     </Container>
 
     <Container>
         <Row>
+            <Col sm={12} style={{borderRadius:"50px"}}>
+            <Card style={styles.card} className="text-center">
+            <Card.Header style={styles.header}>Feeds</Card.Header>
+            </Card>
+            </Col>
             <Col>
-            {/* <Posts /> */}
+            <Posts />
             </Col>
         </Row>
     </Container>

@@ -3,7 +3,8 @@ import {
     GET_POSTS,
     ADD_POST,
     DELETE_POST,
-    POSTS_LOADING
+    POSTS_LOADING,
+    GET_PEOPLE_POSTS
   } from './types';
   
 import { tokenConfig } from './authAction';
@@ -24,11 +25,26 @@ export const getPosts = (id) => (dispatch) => {
     );
 };
 
+export const getPeoplePosts = () => (dispatch,getState) => {
+  dispatch(setPostsLoading());
+  axios
+    .get(`http://localhost:5000/api/people/posts`,tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: GET_PEOPLE_POSTS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
 export const addPost = (post) => (
   dispatch,
   getState
 ) => {
-  dispatch(setPostsLoading());
+  // dispatch(setPostsLoading());
   axios
     .post('http://localhost:5000/api/user/post/add', post, 
     tokenConfig(getState)

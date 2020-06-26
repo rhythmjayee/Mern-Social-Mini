@@ -65,7 +65,7 @@ const Profile=(props)=>{
                         <Card.Footer>
                             <Row>
                                 <Col>
-                                    <Button size="lg" style={styles.button} block ><i className="fa fa-users">Followers</i></Button>
+                                    <Button size="lg" style={styles.button} block >{props.user.followers.length} <i className="fa fa-users">Followers</i></Button>
                                     
                                 </Col>
                                 <Col>
@@ -74,7 +74,7 @@ const Profile=(props)=>{
 
                                 </Col>
                                 <Col>
-                                    <Button size="lg" style={styles.button} block><i className="fa fa-users">Followings</i></Button>
+                                    <Button size="lg" style={styles.button} block>{props.user.followings.length}  <i className="fa fa-users">Followings</i></Button>
                                     
 
                                 </Col>

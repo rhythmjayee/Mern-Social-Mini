@@ -65,7 +65,7 @@ return(
         color="#29ff00"
         height={100}
         width={100}
-        timeout={2000} //3 secs
+        timeout={3000} //3 secs
         style={{textAlign:"center"}} 
     />
     }
