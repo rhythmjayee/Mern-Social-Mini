@@ -32,12 +32,6 @@ import {
         return {
           ...state
         };
-        case PEOPLE_LOADING:
-        return {
-          ...state,
-          loading: true
-        };
-        
       default:
         return state;
     }

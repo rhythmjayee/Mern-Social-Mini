@@ -3,7 +3,7 @@ import {Card,Button,Container,Row,Col} from "react-bootstrap"
 import Radium from 'radium';
 
 import {connect} from "react-redux";
-import {loadPeople,followPeople,unFollowPeople} from "../../actions/peopleAction";
+import {loadPeople,followPeople,unFollowPeople,setPeopleLoading} from "../../actions/peopleAction";
 
 
 import Loader from 'react-loader-spinner'
@@ -69,6 +69,7 @@ const AllUsers=(props)=>{
     },[]);
 
     const followHandler=(id)=>{
+        props.setPeopleLoading();
         let follow={
             followId:id,
             userId:props.auth.user._id
@@ -78,6 +79,8 @@ const AllUsers=(props)=>{
     }
 
     const UnfollowHandler=(id)=>{
+        props.setPeopleLoading();
+
         let unfollow={
             unfollowId:id,
             userId:props.auth.user._id
@@ -169,4 +172,4 @@ auth:state.auth
 })
 
 
- export default connect(mapStateToProps,{loadPeople,followPeople,unFollowPeople})(Radium(AllUsers));
+ export default connect(mapStateToProps,{loadPeople,setPeopleLoading,followPeople,unFollowPeople})(Radium(AllUsers));
