@@ -1,6 +1,6 @@
 import React, { useEffect,useCallback } from "react";
 import {connect} from "react-redux";
-import {getPeoplePosts} from "../../../actions/postAction"
+import {getPeoplePosts,likePost} from "../../../actions/postAction"
 
 
 import {Container,Row,Col} from "react-bootstrap"
@@ -22,6 +22,10 @@ const Posts=(props)=>{
 
     console.log(props.post.peoplePosts);
 
+    const likeHandler=(id)=>{
+        props.likePost({PostId:id});
+    }
+
     let UsersPosts;
     if(props.post.peoplePosts.length===0){
         UsersPosts=<h4 
@@ -32,7 +36,7 @@ const Posts=(props)=>{
     else{
       let post=props.post.peoplePosts;
       UsersPosts=post.map((p)=>{
-        return<Post key={p._id} info={p}/>
+        return<Post key={p._id} info={p} like={likeHandler} />
      })
            
     }
@@ -70,4 +74,4 @@ const mapStateToProps=(state)=>({
     
 
 
-export default connect(mapStateToProps,{getPeoplePosts})(Posts);
+export default connect(mapStateToProps,{getPeoplePosts,likePost})(Posts);

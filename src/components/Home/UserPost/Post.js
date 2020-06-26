@@ -79,7 +79,7 @@ return(
             <Card.Text style={styles.cbody}>
             User Article body{props.info.body}
             </Card.Text>
-            <Button style={styles.btn}>{props.info.likes}  <i className="fa fa-thumbs-up"> Likes</i></Button>
+            <Button style={styles.btn} onClick={()=>props.like(props.info._id)}>{props.info.likes.length}   <i className="fa fa-thumbs-up"> Likes</i></Button>
             <Button style={styles.btn}>{" 3 "}    <i className="fa fa-book"> Comments</i></Button>
 
             </Card.Body>

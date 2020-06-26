@@ -82,6 +82,8 @@ export const loadPeople = () => (dispatch, getState) => {
       });
   };
 
+  
+
   export const setPeopleLoading = () => {
     return {
       type: PEOPLE_LOADING

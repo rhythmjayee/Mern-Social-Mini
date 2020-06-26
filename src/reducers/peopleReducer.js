@@ -2,7 +2,7 @@ import {
     PEOPLE_LOADED,
     PEOPLE_LOADING,
     PEOPLE_FOLLOWED,
-    PEOPLE_UNFOLLOWED
+    PEOPLE_UNFOLLOWED,
   } from '../actions/types';
 
   const initialState = {
@@ -25,13 +25,10 @@ import {
           users: action.payload
         };
         case PEOPLE_FOLLOWED:
-        return {
-          ...state
-        };
         case PEOPLE_UNFOLLOWED:
-        return {
-          ...state
-        };
+          return {
+            ...state
+          };
       default:
         return state;
     }

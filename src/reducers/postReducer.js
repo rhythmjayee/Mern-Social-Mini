@@ -3,7 +3,9 @@ import {
     ADD_POST,
     DELETE_POST,
     POSTS_LOADING,
-    GET_PEOPLE_POSTS
+    GET_PEOPLE_POSTS,
+    POST_LIKED
+
   } from '../actions/types';
   
   const initialState = {
@@ -39,6 +41,11 @@ import {
           ...state,
           posts: [action.payload, ...state.posts]
         };
+        case POST_LIKED:
+          return{
+            ...state,
+            loading: false
+          }
       case POSTS_LOADING:
         return {
           ...state,
