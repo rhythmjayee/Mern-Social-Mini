@@ -3,7 +3,7 @@ import {Card,Button,Container,Row,Col} from "react-bootstrap"
 import Radium from 'radium';
 
 import {connect} from "react-redux";
-import {loadPeople} from "../../actions/peopleAction";
+import {loadPeople,followPeople,unFollowPeople} from "../../actions/peopleAction";
 
 
 import Loader from 'react-loader-spinner'
@@ -40,6 +40,13 @@ const AllUsers=(props)=>{
             border:"2px solid #29ff00",
             borderRadius:"50px"
         },
+        UNbutton:{
+            color:"#0c0c0C",
+            fontWeight:"bold",
+            backgroundColor:"#29ff00",
+            border:"2px solid #0c0c0C",
+            borderRadius:"50px"
+        },
         card:{
             boxShadow: ' 3px 3px #0c0c0C',
             width:"100%",
@@ -60,6 +67,24 @@ const AllUsers=(props)=>{
     useEffect(()=>{
         props.loadPeople();
     },[]);
+
+    const followHandler=(id)=>{
+        let follow={
+            followId:id,
+            userId:props.auth.user._id
+        }
+        props.followPeople(follow);
+
+    }
+
+    const UnfollowHandler=(id)=>{
+        let unfollow={
+            unfollowId:id,
+            userId:props.auth.user._id
+        }
+        props.unFollowPeople(unfollow);
+
+    }
 
 
 console.log("people......")
@@ -82,8 +107,10 @@ console.log("people......")
         </Card.Body>
         <Card.Footer>
             <Row>
-                <Col>
-                    <Button size="lg" style={styles.button} block ><i className="fa fa-users">Follow</i></Button>
+                <Col>{p.followers.indexOf(props.auth.user._id)!== -1?
+                <Button size="lg" style={styles.UNbutton} onClick={()=>UnfollowHandler(p._id)} block ><i className="fa fa-users">Unfollow</i></Button>:
+                <Button size="lg" style={styles.button} onClick={()=>followHandler(p._id)} block ><i className="fa fa-users">Follow</i></Button>
+            }
                     
                 </Col>
                 <Col>
@@ -92,7 +119,7 @@ console.log("people......")
 
                 </Col>
                 <Col>
-                    <Button size="lg" style={styles.button} block><i className="fa fa-users">Followers</i></Button>
+                    <Button size="lg" style={styles.button} block>{p.followers.length}    <i className="fa fa-users">Followers</i></Button>
                     
 
                 </Col>
@@ -137,8 +164,9 @@ console.log("people......")
 
 
 const mapStateToProps=(state)=>({
-people:state.people
+people:state.people,
+auth:state.auth
 })
 
 
- export default connect(mapStateToProps,{loadPeople})(Radium(AllUsers));
+ export default connect(mapStateToProps,{loadPeople,followPeople,unFollowPeople})(Radium(AllUsers));

@@ -1,6 +1,8 @@
 import {
     PEOPLE_LOADED,
     PEOPLE_LOADING,
+    PEOPLE_FOLLOWED,
+    PEOPLE_UNFOLLOWED
   } from '../actions/types';
 
   const initialState = {
@@ -22,6 +24,20 @@ import {
           isLoading: false,
           users: action.payload
         };
+        case PEOPLE_FOLLOWED:
+        return {
+          ...state
+        };
+        case PEOPLE_UNFOLLOWED:
+        return {
+          ...state
+        };
+        case PEOPLE_LOADING:
+        return {
+          ...state,
+          loading: true
+        };
+        
       default:
         return state;
     }
