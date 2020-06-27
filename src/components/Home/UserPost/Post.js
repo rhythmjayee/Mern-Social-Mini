@@ -64,6 +64,14 @@ const Post=(props)=>{
             border:"1px solid",
             marginTop:"20px",
             borderRadius:"50px"
+        },
+         Lbtn:{
+            backgroundColor:"#29ff00",
+            color:"#0c0c0C",
+            marginLeft:"10px",
+            border:"1px solid",
+            marginTop:"20px",
+            borderRadius:"50px"
         }
 
     }
@@ -79,7 +87,10 @@ return(
             <Card.Text style={styles.cbody}>
             User Article body{props.info.body}
             </Card.Text>
+            {props.info.likes.indexOf(props.usrId)=== -1 ?
             <Button style={styles.btn} onClick={()=>props.like(props.info._id)}>{props.info.likes.length}   <i className="fa fa-thumbs-up"> Likes</i></Button>
+            :<Button style={styles.Lbtn} onClick={()=>props.unlike(props.info._id)}>{props.info.likes.length}   <i className="fa fa-thumbs-up"> Likes</i></Button>
+            }
             <Button style={styles.btn}>{" 3 "}    <i className="fa fa-book"> Comments</i></Button>
 
             </Card.Body>

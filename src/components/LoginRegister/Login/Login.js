@@ -7,6 +7,9 @@ import {Card,Button,Container,Row,Col,Form,Alert} from "react-bootstrap"
 import {Link, Redirect} from "react-router-dom"
 import {connect} from "react-redux";
 
+import Loader from 'react-loader-spinner'
+
+
 import {login} from "../../../actions/authAction"
 import {clearErrors} from "../../../actions/errorAction"
 
@@ -108,7 +111,7 @@ const Login=(props)=>{
     return(
     <Container >
         <Row>
-            <Col style={styles.col}>
+            <Col sm={12} style={styles.col}>
             <Card style={styles.card} className="text-center">
             <Card.Header style={styles.header}>Login</Card.Header>
             <Card.Body style={styles.cbody}>
@@ -132,6 +135,16 @@ const Login=(props)=>{
     <Card.Footer style={styles.header} className="text-muted" >don't have an account? <Link to="/signup" style={styles.lightgreenColor}>SignUp</Link></Card.Footer>
         </Card>
             </Col>
+            <Col>
+            {props.loading &&  <Loader
+                type="Circles"
+                color="#29ff00"
+                height={100}
+                width={100}
+                timeout={2000} //3 secs
+                style={{textAlign:"center"}} 
+             /> }
+            </Col>
         </Row>
     </Container>
         
@@ -141,6 +154,7 @@ const Login=(props)=>{
 
 
 const mapStateToProps=state=>({
+    loading:state.auth.isLoading,
     auth:state.auth.isAuthenticated,
     error:state.error
 })

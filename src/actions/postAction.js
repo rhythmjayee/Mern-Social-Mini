@@ -5,6 +5,7 @@ import {
     DELETE_POST,
     POSTS_LOADING,
     POST_LIKED,
+    POST_UNLIKED,
     GET_PEOPLE_POSTS
   } from './types';
   
@@ -92,6 +93,26 @@ export const likePost= (like) => (dispatch, getState) => {
     .then(res =>{
       dispatch({
         type: POST_LIKED,
+        payload: res.data
+      }); 
+    }
+      
+    ).then(res=>{
+      dispatch(getPeoplePosts());
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const unlikePost= (unlike) => (dispatch, getState) => {
+  // User loading
+  // dispatch({ type: PEOPLE_LOADING });
+  axios
+    .post('http://localhost:5000/api/people/unlike',unlike, tokenConfig(getState))
+    .then(res =>{
+      dispatch({
+        type: POST_UNLIKED,
         payload: res.data
       }); 
     }

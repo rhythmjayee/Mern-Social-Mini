@@ -4,7 +4,8 @@ import {
     DELETE_POST,
     POSTS_LOADING,
     GET_PEOPLE_POSTS,
-    POST_LIKED
+    POST_LIKED,
+    POST_UNLIKED
 
   } from '../actions/types';
   
@@ -42,6 +43,7 @@ import {
           posts: [action.payload, ...state.posts]
         };
         case POST_LIKED:
+          case POST_UNLIKED:
           return{
             ...state,
             loading: false

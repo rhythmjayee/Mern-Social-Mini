@@ -7,6 +7,8 @@ import {Card,Button,Container,Row,Col,Form,Alert} from "react-bootstrap"
 
 import {Link,Redirect} from "react-router-dom"
 
+import Loader from 'react-loader-spinner'
+
 import {register} from "../../../actions/authAction"
 import {clearErrors} from "../../../actions/errorAction"
 
@@ -104,7 +106,7 @@ const Register=(props)=>{
     return(
     <Container >
         <Row>
-            <Col style={styles.col}>
+            <Col sm={12} style={styles.col}>
             <Card style={styles.card} className="text-center">
             <Card.Header style={styles.header}>SignUp</Card.Header>
             <Card.Body style={styles.cbody}>
@@ -130,6 +132,16 @@ const Register=(props)=>{
     <Card.Footer style={styles.header} className="text-muted" >already have an account? <Link to="/login" style={styles.lightgreenColor}>Login</Link></Card.Footer>
         </Card>
             </Col>
+            <Col>
+            {props.loading &&  <Loader
+                type="Circles"
+                color="#29ff00"
+                height={100}
+                width={100}
+                timeout={2000} //3 secs
+                style={{textAlign:"center"}} 
+             /> }
+            </Col>
         </Row>
     </Container>
         
@@ -137,6 +149,7 @@ const Register=(props)=>{
 }
 
 const mapStateToProps=state=>({
+    loading:state.auth.isLoading,
     auth:state.auth.isAuthenticated,
     error:state.error
 })
