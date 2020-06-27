@@ -31,12 +31,12 @@ export const getPeoplePosts = () => (dispatch,getState) => {
   dispatch(setPostsLoading());
   axios
     .get(`http://localhost:5000/api/people/posts`,tokenConfig(getState))
-    .then(res =>
+    .then(res=>{
       dispatch({
         type: GET_PEOPLE_POSTS,
         payload: res.data
       })
-    )
+    })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
