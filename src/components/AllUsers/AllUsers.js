@@ -153,7 +153,7 @@ console.log("people......")
         color="#29ff00"
         height={100}
         width={100}
-        timeout={2000} //3 secs
+        timeout={5000} //3 secs
         style={{textAlign:"center"}} 
     />
     }

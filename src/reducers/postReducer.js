@@ -40,7 +40,7 @@ import {
       case ADD_POST:
         return {
           ...state,
-          posts: [action.payload, ...state.posts]
+          posts: [...action.payload, ...state.posts]
         };
         case POST_LIKED:
           case POST_UNLIKED:

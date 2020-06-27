@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import {Card,Button,Container,Row,Col} from "react-bootstrap"
 import Radium from 'radium';
+
+import {getPosts} from "../../actions/postAction"
+import {loadUser} from "../../actions/authAction"
+
 
 import {connect} from "react-redux";
 
@@ -49,6 +53,19 @@ const Profile=(props)=>{
         },
 
     }
+
+        // const [post,setPost]=useState([]);
+        // let posts=props.user.posts;
+
+        useEffect(()=>{
+            console.log("profile....")
+            props.loadUser();
+        },[])
+
+        useEffect(()=>{
+            props.getPosts(props.user._id);
+        },[])
+
     return(
         <>
             <Container fluid>
@@ -119,4 +136,4 @@ user:state.auth.user
 
 
 
-export default connect(mapStateToProps,null)(Radium(Profile));
+export default connect(mapStateToProps,{getPosts,loadUser})(Radium(Profile));

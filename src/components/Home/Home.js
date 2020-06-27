@@ -98,6 +98,7 @@ const Home=(props)=>{
            props.addPost(newPost);
  
         props.clearErrors();
+        // props.getPosts(props.auth.user._id);
         // setLoding(false);
         setMess("POst Added!!!")
 
