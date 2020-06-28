@@ -9,7 +9,7 @@ import Posts from "./UserPosts/Posts"
 import {addPost} from "../../actions/postAction";
 import {clearErrors} from "../../actions/errorAction";
 
-import Loader from 'react-loader-spinner'
+// import Loader from 'react-loader-spinner'
 
 
 const Home=(props)=>{

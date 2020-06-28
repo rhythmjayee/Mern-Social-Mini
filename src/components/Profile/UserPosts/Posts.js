@@ -1,10 +1,10 @@
-import React, {useEffect,useCallback } from "react";
+import React from "react";
 import {connect} from "react-redux";
 import {getPosts,deletePost} from "../../../actions/postAction"
 
 
 
-import {Accordion,Card,Button,Container,Row,Col,Form} from "react-bootstrap"
+import {Container,Row,Col} from "react-bootstrap"
 import Loader from 'react-loader-spinner'
 
 

@@ -2,8 +2,9 @@ import React from "react";
 import Radium from 'radium';
 
 
-import {Accordion,Card,Button,Container,Row,Col,Form} from "react-bootstrap"
+import {Accordion,Card,Button,Container,Row,Col} from "react-bootstrap"
 
+import Input from "../CommentInput/Input";
 
 const Post=(props)=>{
     const styles={
@@ -91,7 +92,7 @@ return(
             <Button style={styles.btn} onClick={()=>props.like(props.info._id)}>{props.info.likes.length}   <i className="fa fa-thumbs-up"> Likes</i></Button>
             :<Button style={styles.Lbtn} onClick={()=>props.unlike(props.info._id)}>{props.info.likes.length}   <i className="fa fa-thumbs-up"> Likes</i></Button>
             }
-            <Button style={styles.btn}>{" 3 "}    <i className="fa fa-book"> Comments</i></Button>
+            <Button style={styles.btn}>{props.info.comments.length}   <i className="fa fa-book"> Comments</i></Button>
 
             </Card.Body>
                 <Accordion.Toggle as={Card.Header} style={styles.commentA}  eventKey="0">
@@ -114,16 +115,7 @@ return(
                         </Row>
                     </Container>
                         
-                <Form>
-                    <Row>
-                        <Col sm={10}>
-                        <Form.Control  style={styles.header} type="text" placeholder="type here...." />
-                        </Col>
-                        <Col sm>
-                        <Button style={{backgroundColor:"#0c0c0C",color:"#29ff00",borderRadius:"50px", border:"2px solid #29ff00"}}>add</Button>                    
-                        </Col>
-                    </Row>
-                    </Form>
+                    <Input postId={props.info._id} />
                 </Card.Body>
                 </Accordion.Collapse>
             </Card>

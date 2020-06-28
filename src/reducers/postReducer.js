@@ -5,7 +5,8 @@ import {
     POSTS_LOADING,
     GET_PEOPLE_POSTS,
     POST_LIKED,
-    POST_UNLIKED
+    POST_UNLIKED,
+    POST_COMMENTED
 
   } from '../actions/types';
   
@@ -25,7 +26,7 @@ import {
           posts: action.payload,
           loading: false
         };
-        case GET_PEOPLE_POSTS:
+          case GET_PEOPLE_POSTS:
           return {
             ...state,
             peoplePosts: [...action.payload],
@@ -44,6 +45,7 @@ import {
         };
         case POST_LIKED:
           case POST_UNLIKED:
+            case POST_COMMENTED:
           return{
             ...state,
             loading: false
