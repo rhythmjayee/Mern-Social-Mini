@@ -45,6 +45,21 @@ export const getPeoplePosts = () => (dispatch,getState) => {
     );
 };
 
+// export const getComments = (id) => (dispatch) => {
+//   dispatch(setPostsLoading());
+//   axios
+//     .get(`http://localhost:5000/api/people/comments/${id}`)
+//     .then(res =>
+//       dispatch({
+//         type: GET_POSTS,
+//         payload: res.data
+//       })
+//     )
+//     .catch(err =>
+//       dispatch(returnErrors(err.response.data, err.response.status))
+//     );
+// };
+
 export const addPost = (post) => (
   dispatch,
   getState
