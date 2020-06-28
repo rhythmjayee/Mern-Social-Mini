@@ -58,7 +58,7 @@ const Profile=(props)=>{
         // let posts=props.user.posts;
 
         useEffect(()=>{
-            console.log("profile....")
+            // console.log("profile....")
             props.loadUser();
         },[])
 

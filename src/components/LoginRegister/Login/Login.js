@@ -99,9 +99,9 @@ const Login=(props)=>{
     }
 
     if(props.auth){
-        console.log("login......");
+        // console.log("login......");
         // props.clearErrors();
-        console.log(error);
+        // console.log(error);
         return <Redirect from="/login" to="/"></Redirect>
     }
 

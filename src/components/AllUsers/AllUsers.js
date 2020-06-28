@@ -90,7 +90,7 @@ const AllUsers=(props)=>{
     }
 
 
-console.log("people......")
+// console.log("people......")
 
 
     let Users;

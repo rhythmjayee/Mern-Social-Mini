@@ -98,8 +98,8 @@ const Register=(props)=>{
     }
 
     if(props.auth){
-        console.log("register......");
-        console.log(error);
+        // console.log("register......");
+        // console.log(error);
         return <Redirect from="/signup" to="/"></Redirect>
     }
 

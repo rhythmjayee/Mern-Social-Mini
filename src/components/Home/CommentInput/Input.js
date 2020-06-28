@@ -27,13 +27,13 @@ const Input=(props)=>{
     const [input,setInput]=useState("");
 
     const inputHandler=(e)=>{
-        console.log("input....")
+        // console.log("input....")
         setInput(e.target.value);
     }
 
     const onSubmitHandler=(e)=>{
-        console.log("submit....")
-        console.log(props.id)
+        // console.log("submit....")
+        // console.log(props.id)
         e.preventDefault();
         const comment={
             body:input,

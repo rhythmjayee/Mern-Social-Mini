@@ -100,7 +100,7 @@ const Home=(props)=>{
         props.clearErrors();
         // props.getPosts(props.auth.user._id);
         // setLoding(false);
-        setMess("POst Added!!!")
+        setMess("Post Added!!!")
 
 
 
@@ -114,11 +114,11 @@ const Home=(props)=>{
 <Container >
         <Row>
             <Col sm={12} style={styles.col}>
+            {errorM && <Alert style={{background:"#0c0c0C",color:"#29ff00",textAlign:"center"}} color="danger">{errorM}</Alert>}
             <Card style={styles.card} className="text-center">
             <Card.Header style={styles.header}>Write a Post</Card.Header>
             <Card.Body style={styles.cbody}>
-            {errorM && <Alert style={{background:"#0c0c0C"}} color="danger">{errorM}</Alert>}
-            {Mess && <Alert style={{background:"#0c0c0C"}} color="danger">{Mess}</Alert>}
+            {!errorM && Mess && <Alert style={{background:"#0c0c0C"}} color="danger">{Mess}</Alert>}
             <Form onSubmit={addPostHandler}>
             <Form.Group controlId="formBasicname">
                     <Form.Control style={styles.FormControl} type="text" onChange={handleChangeInput} name="body" placeholder="write here..." autoComplete="off"/>
