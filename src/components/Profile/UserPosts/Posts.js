@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {getPosts,deletePost} from "../../../actions/postAction"
 
 
+
 import {Accordion,Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 import Loader from 'react-loader-spinner'
 
@@ -89,7 +90,7 @@ const Posts=(props)=>{
 
     const onDeletePostHandler=(id)=>{
         console.log("clicked??")
-        props.deletePost(id)
+        props.deletePost(id);
 
     }
 

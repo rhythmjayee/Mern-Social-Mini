@@ -8,8 +8,10 @@ import {
     POST_UNLIKED,
     GET_PEOPLE_POSTS
   } from './types';
+
   
-import { tokenConfig } from './authAction';
+  
+import { tokenConfig,loadUser } from './authAction';
 import { returnErrors } from './errorAction';
 
 export const getPosts = (id) => (dispatch) => {
@@ -79,7 +81,9 @@ export const deletePost = (id) => (
         type: DELETE_POST,
         payload: id
       })
-    )
+    ).then(res=>{
+      dispatch(loadUser());
+    })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
