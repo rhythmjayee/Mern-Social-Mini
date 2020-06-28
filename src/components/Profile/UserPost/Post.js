@@ -80,7 +80,7 @@ return(
             {props.info.body}
             </Card.Text>
             <Button style={styles.btn} disabled>{props.info.likes.length}  <i className="fa fa-thumbs-up"> Likes</i></Button>
-            <Button style={styles.btn} disabled>{" 3 "}    <i className="fa fa-book"> Comments</i></Button>
+            <Button style={styles.btn} disabled>{props.info.comments.length}   <i className="fa fa-book"> Comments</i></Button>
             <Button style={styles.btn} onClick={()=>props.delete(props.info._id)}><i className="fa fa-trash"></i></Button>
 
             </Card.Body>
@@ -91,29 +91,20 @@ return(
                 <Card.Body style={styles.comments} >
                     <Container className="m-3">
                         <Row>
-                            <Col sm>
+                        {props.info.comments.map(c=>{
+                                return<Col style={{marginTop:"20px"}} key={c._id} sm={12}>
                             <Card.Body style={styles.header}>
-                            <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>User Name</Card.Title>
+                            <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>{c.user.name}</Card.Title>
 
                                 <Card.Text style={styles.cbody}>
-                                User Article body
+                                {c.body}
                                 </Card.Text> 
                             </Card.Body>
                             
                             </Col>
+                            })}
                         </Row>
                     </Container>
-                        
-                <Form>
-                    <Row>
-                        <Col sm={10}>
-                        <Form.Control  style={styles.header} type="text" placeholder="type here...." />
-                        </Col>
-                        <Col sm>
-                        <Button style={{backgroundColor:"#0c0c0C",color:"#29ff00",borderRadius:"50px", border:"2px solid #29ff00"}}>add</Button>                    
-                        </Col>
-                    </Row>
-                    </Form>
                 </Card.Body>
                 </Accordion.Collapse>
             </Card>
