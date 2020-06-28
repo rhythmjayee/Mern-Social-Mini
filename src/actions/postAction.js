@@ -18,7 +18,7 @@ import { returnErrors } from './errorAction';
 export const getPosts = (id) => (dispatch) => {
   dispatch(setPostsLoading());
   axios
-    .get(`http://localhost:5000/api/user/post/${id}`)
+    .get(`${process.env.REACT_APP_BACKEND_URL}/user/post/${id}`)
     .then(res =>
       dispatch({
         type: GET_POSTS,
@@ -33,7 +33,7 @@ export const getPosts = (id) => (dispatch) => {
 export const getPeoplePosts = () => (dispatch,getState) => {
   dispatch(setPostsLoading());
   axios
-    .get(`http://localhost:5000/api/people/posts`,tokenConfig(getState))
+    .get(process.env.REACT_APP_BACKEND_URL+`/people/posts`,tokenConfig(getState))
     .then(res=>
       dispatch({
         type: GET_PEOPLE_POSTS,
@@ -45,20 +45,6 @@ export const getPeoplePosts = () => (dispatch,getState) => {
     );
 };
 
-// export const getComments = (id) => (dispatch) => {
-//   dispatch(setPostsLoading());
-//   axios
-//     .get(`http://localhost:5000/api/people/comments/${id}`)
-//     .then(res =>
-//       dispatch({
-//         type: GET_POSTS,
-//         payload: res.data
-//       })
-//     )
-//     .catch(err =>
-//       dispatch(returnErrors(err.response.data, err.response.status))
-//     );
-// };
 
 export const addPost = (post) => (
   dispatch,
@@ -66,7 +52,7 @@ export const addPost = (post) => (
 ) => {
   // dispatch(setPostsLoading());
   axios
-    .post('http://localhost:5000/api/user/post/add', post, 
+    .post(process.env.REACT_APP_BACKEND_URL+'/user/post/add', post, 
     tokenConfig(getState)
     )
     .then(res =>{
@@ -89,7 +75,7 @@ export const deletePost = (id) => (
 ) => {
   dispatch(setPostsLoading());
   axios
-    .delete(`http://localhost:5000/api/user/post/${id}`,
+    .delete(`${process.env.REACT_APP_BACKEND_URL}/user/post/${id}`,
      tokenConfig(getState)
      )
     .then(res =>
@@ -109,7 +95,7 @@ export const likePost= (like) => (dispatch, getState) => {
   // User loading
   // dispatch({ type: PEOPLE_LOADING });
   axios
-    .post('http://localhost:5000/api/people/like',like, tokenConfig(getState))
+    .post(process.env.REACT_APP_BACKEND_URL+'/people/like',like, tokenConfig(getState))
     .then(res =>{
       dispatch({
         type: POST_LIKED,
@@ -129,7 +115,7 @@ export const unlikePost= (unlike) => (dispatch, getState) => {
   // User loading
   // dispatch({ type: PEOPLE_LOADING });
   axios
-    .post('http://localhost:5000/api/people/unlike',unlike, tokenConfig(getState))
+    .post(process.env.REACT_APP_BACKEND_URL+'/people/unlike',unlike, tokenConfig(getState))
     .then(res =>{
       dispatch({
         type: POST_UNLIKED,
@@ -149,7 +135,7 @@ export const commentPost= (comment) => (dispatch, getState) => {
   // User loading
   // dispatch({ type: PEOPLE_LOADING });
   axios
-    .post('http://localhost:5000/api/people/comment',comment, tokenConfig(getState))
+    .post(process.env.REACT_APP_BACKEND_URL+'/people/comment',comment, tokenConfig(getState))
     .then(res =>{
       dispatch({
         type: POST_COMMENTED,

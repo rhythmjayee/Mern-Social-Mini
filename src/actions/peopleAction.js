@@ -16,7 +16,7 @@ export const loadPeople = () => (dispatch, getState) => {
     dispatch({ type: PEOPLE_LOADING });
   
     axios
-      .get('http://localhost:5000/api/people', tokenConfig(getState))
+      .get(process.env.REACT_APP_BACKEND_URL+'/people', tokenConfig(getState))
       .then(res =>
         dispatch({
           type: PEOPLE_LOADED,
@@ -36,7 +36,7 @@ export const loadPeople = () => (dispatch, getState) => {
     // dispatch({ type: PEOPLE_LOADING });
   
     axios
-      .post('http://localhost:5000/api/people/follow',follow, tokenConfig(getState))
+      .post(process.env.REACT_APP_BACKEND_URL+'/people/follow',follow, tokenConfig(getState))
       .then(res =>{
         // dispatch(setPeopleLoading());
         dispatch({
@@ -61,7 +61,7 @@ export const loadPeople = () => (dispatch, getState) => {
     // dispatch({ type: PEOPLE_LOADING });
   
     axios
-      .post('http://localhost:5000/api/people/unfollow',follow, tokenConfig(getState))
+      .post(process.env.REACT_APP_BACKEND_URL+'/people/unfollow',follow, tokenConfig(getState))
       .then(res =>{
         // dispatch(setPeopleLoading());
         dispatch({
