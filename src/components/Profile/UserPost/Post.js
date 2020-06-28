@@ -4,6 +4,7 @@ import Radium from 'radium';
 
 import {Accordion,Card,Button,Container,Row,Col,Form} from "react-bootstrap"
 
+import Comments from "../Comments/Comments"
 
 const Post=(props)=>{
     const styles={
@@ -91,18 +92,10 @@ return(
                 <Card.Body style={styles.comments} >
                     <Container className="m-3">
                         <Row>
-                        {props.info.comments.map(c=>{
-                                return<Col style={{marginTop:"20px"}} key={c._id} sm={12}>
-                            <Card.Body style={styles.header}>
-                            <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>{c.user.name}</Card.Title>
-
-                                <Card.Text style={styles.cbody}>
-                                {c.body}
-                                </Card.Text> 
-                            </Card.Body>
-                            
-                            </Col>
-                            })}
+                        {props.info.comments.length!==0 ?props.info.comments.map((c,index)=>{
+                                return<Comments  key={index} c={c} />
+                            }):
+                            null}
                         </Row>
                     </Container>
                 </Card.Body>
