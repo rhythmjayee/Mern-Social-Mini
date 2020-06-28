@@ -83,9 +83,9 @@ return(
        <Col sm={12}> <Accordion style={{marginTop:"50px"}} defaultActiveKey="1">
             <Card style={styles.header}> 
             <Card.Body style={styles.header}>
-        <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>User Name{props.info.creator}</Card.Title>
+        <Card.Title style={{textAlign:"center",textTransform:"uppercase"}}>{props.info.creator.name}</Card.Title>
             <Card.Text style={styles.cbody}>
-            User Article body{props.info.body}
+            {props.info.body}
             </Card.Text>
             {props.info.likes.indexOf(props.usrId)=== -1 ?
             <Button style={styles.btn} onClick={()=>props.like(props.info._id)}>{props.info.likes.length}   <i className="fa fa-thumbs-up"> Likes</i></Button>

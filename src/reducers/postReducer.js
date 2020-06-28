@@ -28,7 +28,7 @@ import {
         case GET_PEOPLE_POSTS:
           return {
             ...state,
-            peoplePosts: action.payload,
+            peoplePosts: [...action.payload],
             loading: false
           };
       case DELETE_POST:
